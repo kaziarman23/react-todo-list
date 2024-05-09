@@ -10,7 +10,7 @@ function App() {
         setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
     };
 
-    const updatedTodo = (id, todo) => {
+    const updateTodo = (id, todo) => {
         setTodos((prev) =>
             prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo))
         );
@@ -24,7 +24,7 @@ function App() {
         setTodos((prev) =>
             prev.map((prevTodo) =>
                 prevTodo.id === id
-                    ? { ...prevTodo, complited: !prevTodo.complited }
+                    ? { ...prevTodo, completed: !prevTodo.completed }
                     : prevTodo
             )
         );
@@ -43,7 +43,7 @@ function App() {
 
     return (
         <TodoProvider
-            value={{ todos, addTodo, updatedTodo, deleteTodo, toggleComplete }}
+            value={{ todos, addTodo, updateTodo, deleteTodo, toggleComplete }}
         >
             <div className="bg-[#172842] min-h-screen py-8">
                 <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 text-white">
@@ -54,11 +54,11 @@ function App() {
                         <TodoForm />
                     </div>
                     <div className="flex flex-wrap gap-y-3">
-                        {todos.map((todo) => {
+                        {todos.map((todo) => (
                             <div key={todo.id} className="w-full">
                                 <TodoItem todo={todo} />
-                            </div>;
-                        })}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
